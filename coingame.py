@@ -1,7 +1,6 @@
 import pygame, simpleGE, random, collisionTest
 
-class Controller():
-    pass
+
 class Coin(simpleGE.Sprite):
     def __init__(self, scene):
         super().__init__(scene)
