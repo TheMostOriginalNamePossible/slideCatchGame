@@ -1,9 +1,28 @@
-import pygame, simpleGE, collisionTest
+import pygame, simpleGE, random, collisionTest
+
+class Controller():
+    pass
+class Coin(simpleGE.Sprite):
+    def __init__(self, scene):
+        super().__init__(scene)
+        self.setImage("coin.png")
+
 
 class Charlie(simpleGE.Sprite):
     def __init__(self, scene):
         super().__init__(scene)
         self.setImage("Charlie.png")
+        self.setSize(50, 50)
+        self.position = (320, 400)
+        self.moveSpeed = 5
+    def process(self):
+        if self.isKeyPressed(pygame.K_LEFT):
+            self.x -= self.moveSpeed
+        if self.isKeyPressed(pygame.K_RIGHT):
+            self.x += self.moveSpeed
+
+
+
 
 class Game(simpleGE.Scene):
     def __init__(self):
