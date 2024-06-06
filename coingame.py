@@ -32,7 +32,6 @@ class Charlie(simpleGE.Sprite):
         self.position = (320, 400)
         self.moveSpeed = 5
 
-
     def process(self):
         if self.isKeyPressed(pygame.K_LEFT):
             self.x -= self.moveSpeed
@@ -46,10 +45,18 @@ class Game(simpleGE.Scene):
     def __init__(self):
         super().__init__()
         self.setImage("campus.jpg")
+
+        self.sndcoin = simpleGE.Sound("pickupCoin.wav")
         self.charlie = Charlie(self)
         self.coin = Coin(self)
 
         self.sprites = [self.charlie, self.coin]
+
+    def process(self):
+        if self.coin.collidesWith(self.charlie):
+            self.coin.reset()
+            self.sndcoin.play()
+
 
 
 def main():
