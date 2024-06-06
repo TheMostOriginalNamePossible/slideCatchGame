@@ -24,6 +24,7 @@ class Coin(simpleGE.Sprite):
         if self.bottom > self.screenHeight:
             self.reset()
 
+
 class Charlie(simpleGE.Sprite):
     def __init__(self, scene):
         super().__init__(scene)
@@ -39,29 +40,30 @@ class Charlie(simpleGE.Sprite):
             self.x += self.moveSpeed
 
 
-
-
 class Game(simpleGE.Scene):
     def __init__(self):
         super().__init__()
         self.setImage("campus.jpg")
 
         self.sndcoin = simpleGE.Sound("pickupCoin.wav")
+        self.numCoins = 10
         self.charlie = Charlie(self)
-        self.coin = Coin(self)
-
-        self.sprites = [self.charlie, self.coin]
+        self.coins = []
+        for i in range(self.numCoins):
+            self.coins.append(Coin(self))
+        self.sprites = [self.charlie, self.coins]
 
     def process(self):
-        if self.coin.collidesWith(self.charlie):
-            self.coin.reset()
-            self.sndcoin.play()
-
+        for coin in self.coins:
+            if coin.collidesWith(self.charlie):
+                coin.reset()
+                self.sndcoin.play()
 
 
 def main():
     game = Game()
     game.start()
+
 
 if __name__ == "__main__":
     main()
